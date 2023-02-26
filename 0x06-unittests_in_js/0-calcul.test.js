@@ -1,35 +1,48 @@
-const assert = require("assert");
-const calculateNumber = require('./0-calcul')
+const assert = require('assert');
+const calculateNumber = require('./0-calcul');
 
-describe("round check", function () {
-    it("floating point whole numbers", () => {
-        assert.strictEqual(calculateNumber(1.0, 2.0), 3)
+describe('calculateNumber', function () {
+    it('Should return 4', function () {
+        assert.strictEqual(calculateNumber(1, 3), 4);
     });
 
-    it('rounding down a', () => {
-        assert.strictEqual(calculateNumber(1.0, 2.4), 3);
-    });
-    it('rounding down a and b\'s floating point fractional number', () => {
-        assert.strictEqual(calculateNumber(1.4, 2.4), 3);
+    it('Should return -5', function () {
+        assert.strictEqual(calculateNumber(-3, -2), -5);
     });
 
-    it('rounding down a\'s floating point fractional number', () => {
-        assert.strictEqual(calculateNumber(1.4, 2.0), 3);
+    it('Should return 5', function () {
+        assert.strictEqual(calculateNumber(1.4, 3.7), 5);
     });
 
-    it('rounding up b\'s floating point fractional numbers', () => {
-        assert.strictEqual(calculateNumber(1.0, 2.5), 4);
+    it('Should return -5', function () {
+        assert.strictEqual(calculateNumber(-1.4, -3.7), -5);
     });
 
-    it('rounding up a and b\'s floating point fractional numbers', () => {
-        assert.strictEqual(calculateNumber(2.6, 2.5), 6);
+    it('Should return 5', function () {
+        assert.strictEqual(calculateNumber(1.45, 3.79), 5);
     });
 
-    it('rounding up a\'s floating point fractional numbers', () => {
-        assert.strictEqual(calculateNumber(2.6, 2.0), 5);
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber('a', 'b'), NaN);
     });
 
-    it('rounding down a and b floating point fractional numbers with trailing 9\'s', () => {
-        assert.strictEqual(calculateNumber(2.499999, 3.499999), 5);
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber('goat', 'dog'), NaN);
+    });
+
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber([1, 2, 3], 5), NaN);
+    });
+
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber({ a: 24 }, 5), NaN);
+    });
+
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber(), NaN);
+    });
+
+    it('Should return NaN', function () {
+        assert.strictEqual(calculateNumber(2), NaN);
     });
 });
