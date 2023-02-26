@@ -1,63 +1,62 @@
-const assert = require("assert");
-const calculateNumber = require("./1-calcul");
-const { expect } = require("chai");
+const { expect } = require('chai');
+const calculateNumber = require('./2-calcul_chai');
 
-describe("calculateNumber", function () {
-    describe('type == "SUM"', () => {
-        it("correct result for addition", () => {
-            expect(calculateNumber("SUM", 1.0, 2.0)).to.equal(3);
-        });
-        it("equal positive numbers (alternate)", () => {
-            expect(calculateNumber("SUM", 2.3, 1.8)).to.equal(4);
+describe('calculateNumber', () => {
+    describe('SUM', () => {
+        it('Should test positive floating number', () => {
+            expect(calculateNumber('SUM', 1.3, 2.5)).to.equal(4);
         });
 
-        it("equal negative numbers", () => {
-            expect(calculateNumber("SUM", -2.0, -2.0)).to.equal(-4);
+        it('Should test negative floating number', () => {
+            expect(calculateNumber('SUM', -1.3, -2.5)).to.equal(-3);
         });
 
-        it("equal negative numbers (alternate)", () => {
-            expect(calculateNumber("SUM", -2.3, -1.8)).to.equal(-4);
+        it('Should test two decimal point number', () => {
+            expect(calculateNumber('SUM', 1.35, 5.66)).to.equal(7);
         });
 
-        it("negative and positive numbers", () => {
-            expect(calculateNumber("SUM", -2.0, 2.0)).to.equal(0);
+        it('Should test two mixed type', () => {
+            expect(calculateNumber('SUM', '3.5', 5.66)).to.equal(10);
         });
     });
-    describe('type == "SUBTRACT"', () => {
-        it("correct result for subtraction", () => {
-            expect(calculateNumber("SUBTRACT", 1.0, 2.4)).to.equal(-1);
-        });
-        it("equal positive numbers (alternate)", () => {
-            expect(calculateNumber("SUBTRACT", 2.3, 1.8)).to.equal(0);
-        });
+});
 
-        it("equal negative numbers", () => {
-            expect(calculateNumber("SUBTRACT", -2.0, -2.0)).to.equal(0);
-        });
-
-        it("equal negative numbers (alternate)", () => {
-            expect(calculateNumber("SUBTRACT", -2.3, -1.8)).to.equal(0);
-        });
-
-        it("negative and positive numbers", () => {
-            expect(calculateNumber("SUBTRACT", -2.0, 2.0)).to.equal(-4.0);
-        });
+describe('SUBTRACT', () => {
+    it('Should test positive floating number', () => {
+        expect(calculateNumber('SUBTRACT', 1.3, 2.5)).to.equal(-2);
     });
-    describe('type == "DIVIDE"', () => {
-        it("numbers with different signs", () => {
-            expect(calculateNumber("DIVIDE", -7.0, 2.0)).to.equal(-3.5);
-        });
 
-        it("numbers with different signs (alternate)", () => {
-            expect(calculateNumber("DIVIDE", 7.0, -2.0)).to.equal(-3.5);
-        });
+    it('Should test negative floating number', () => {
+        expect(calculateNumber('SUBTRACT', -1.3, -2.5)).to.equal(1);
+    });
 
-        it("negative numbers", () => {
-            expect(calculateNumber("DIVIDE", -7.0, -2.0)).to.equal(3.5);
-        });
+    it('Should test two decimal point number', () => {
+        expect(calculateNumber('SUBTRACT', 5.66, 2.56)).to.equal(3);
+    });
 
-        it("equal positive numbers", () => {
-            expect(calculateNumber("DIVIDE", 2.0, 2.0)).to.equal(1);
-        });
+    it('Should test two mixed type', () => {
+        expect(calculateNumber('SUBTRACT', '5.66', 2.0)).to.equal(4);
+    });
+});
+
+describe('DIVIDE', () => {
+    it('Should test positive floating number', () => {
+        expect(calculateNumber('DIVIDE', 1.3, 2.5)).to.equal(0.3333333333333333);
+    });
+
+    it('Should test positive floating number', () => {
+        expect(calculateNumber('DIVIDE', 6.4, 2.4)).to.equal(3.0);
+    });
+
+    it('Should test negative floating number', () => {
+        expect(calculateNumber('DIVIDE', -6.4, -2.4)).to.equal(3.0);
+    });
+
+    it('Should test for Zero division', () => {
+        expect(calculateNumber('DIVIDE', 1.3, 0.4)).to.equal('Error');
+    });
+
+    it('Should test for string type', () => {
+        expect(calculateNumber('DIVIDE', 10.6, '2.4')).to.equal(5.5);
     });
 });
